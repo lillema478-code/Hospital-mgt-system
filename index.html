@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Everest Golden Health | Premium Hospital Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Text', 'SF Pro Display', Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #f5e6d3 0%, #f0d8b0 50%, #e8c99e 100%);
+            color: #2c2c2c;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        /* Animated Golden Background */
+        .golden-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(125deg, #f9e5b3 0%, #f3d382 50%, #e6bc72 100%);
+        }
+
+        .golden-bg::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* Modern Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #d4af37, #f5b042);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .logo-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .logo h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #b8860b, #d4af37, #f5b042);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo p {
+            font-size: 0.7rem;
+            color: #b8860b;
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #5a3e1b;
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        nav ul li a:hover {
+            background: linear-gradient(135deg, #d4af37, #f5b042);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.9), rgba(245, 176, 66, 0.9));
+            padding: 3rem 2rem;
+            text-align: center;
+            color: white;
+            margin: 1rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 28px rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+        }
+
+        .stat-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, #d4af37, #f5b042);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon i {
+            font-size: 1.6rem;
+            color: white;
+        }
+
+        .stat-card h3 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #b8860b;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #b8860b, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Tab Bar */
+        .tab-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.6rem;
+            border-radius: 60px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            flex-wrap: wrap;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .tab-btn {
+            padding: 0.8rem 1.8rem;
+            border: none;
+            background: transparent;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #5a3e1b;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn i {
+            font-size: 1rem;
+        }
+
+        .tab-btn:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #d4af37, #f5b042);
+            color: white;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Panels */
+        .panel {
+            display: none;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 28px;
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #b8860b, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 0;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #b8860b;
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #d4af37, #f5b042);
+            color: white;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #e67e22, #f39c12);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+            border-radius: 30px;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+        }
+
+        /* Table */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem;
+            font-weight: 700;
+            color: #b8860b;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        tr:hover td {
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 1.8rem;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .team-card:hover {
+            transform: translateY(-6px);
+            border-color: #d4af37;
+            box-shadow: 0 12px 28px rgba(212, 175, 55, 0.2);
+        }
+
+        .team-avatar {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, #d4af37, #f5b042);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .team-avatar i {
+            font-size: 2.2rem;
+            color: white;
+        }
+
+        .team-card h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: #5a3e1b;
+        }
+
+        .team-role {
+            color: #b8860b;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4af37, #f5b042);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        /* Status */
+        .status-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4af37, #f5b042);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            color: #f5e6d3;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 2px solid #d4af37;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero {
+                margin: 1rem;
+                padding: 2rem 1rem;
+            }
+
+            .tab-bar {
+                border-radius: 20px;
+                justify-content: center;
+            }
+
+            .tab-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="golden-bg"></div>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-hospital"></i>
+                </div>
+                <div>
+                    <h1>Everest Hospital</h1>
+                    <p>Hospital Management system</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showPanel('dashboard')"><i class="fas fa-chart-line"></i> Overview</a></li>
+                    <li><a href="#" onclick="showPanel('patients')"><i class="fas fa-user"></i> Patients</a></li>
+                    <li><a href="#" onclick="showPanel('doctors')"><i class="fas fa-stethoscope"></i> Doctors</a></li>
+                    <li><a href="#" onclick="showPanel('appointments')"><i class="fas fa-calendar"></i> Appointments</a></li>
+                    <li><a href="#" onclick="showPanel('team')"><i class="fas fa-users"></i> Team</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1><i class="fas fa-crown"></i> Everest Golden Health</h1>
+        <p>Where Healthcare Meets Excellence | Premium Care Since 2024</p>
+    </div>
+
+    <div class="container">
+        <!-- Dashboard Panel -->
+        <div id="dashboard" class="panel active">
+            <div class="stats-grid">
+                <div class="stat-card" onclick="showPanel('patients')">
+                    <div class="stat-icon"><i class="fas fa-user-injured"></i></div>
+                    <h3>Total Patients</h3>
+                    <div class="stat-number" id="statPatients">0</div>
+                </div>
+                <div class="stat-card" onclick="showPanel('doctors')">
+                    <div class="stat-icon"><i class="fas fa-user-md"></i></div>
+                    <h3>Medical Staff</h3>
+                    <div class="stat-number" id="statDoctors">0</div>
+                </div>
+                <div class="stat-card" onclick="showPanel('appointments')">
+                    <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                    <h3>Appointments</h3>
+                    <div class="stat-number" id="statAppointments">0</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><i class="fas fa-clock"></i> Recent Appointments</div>
+                <div class="table-wrapper">
+                    <table id="recentTable">
+                        <thead><tr><th>Patient</th><th>Doctor</th><th>Date</th><th>Status</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patients Panel -->
+        <div id="patients" class="panel">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-user-plus"></i> Register New Patient</div>
+                <form id="patientForm">
+                    <div class="form-grid">
+                        <div class="input-group"><label>Full Name</label><input type="text" id="patName" placeholder="Enter full name" required></div>
+                        <div class="input-group"><label>Age</label><input type="number" id="patAge" placeholder="Age" required></div>
+                        <div class="input-group"><label>Gender</label><select id="patGender"><option>Male</option><option>Female</option><option>Other</option></select></div>
+                        <div class="input-group"><label>Phone Number</label><input type="tel" id="patContact" placeholder="+251..." required></div>
+                        <div class="input-group"><label>Address</label><textarea id="patAddress" rows="2" placeholder="Address"></textarea></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Register Patient</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><i class="fas fa-list"></i> Patient Directory</div>
+                <div class="table-wrapper">
+                    <table id="patientsTable">
+                        <thead><tr><th>ID</th><th>Name</th><th>Age</th><th>Contact</th><th>Action</th> </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Doctors Panel -->
+        <div id="doctors" class="panel">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-plus-circle"></i> Add New Doctor</div>
+                <form id="doctorForm">
+                    <div class="form-grid">
+                        <div class="input-group"><label>Doctor Name</label><input type="text" id="docName" placeholder="Dr. ..." required></div>
+                        <div class="input-group"><label>Specialization</label><input type="text" id="docSpec" placeholder="Cardiology, Pediatrics..." required></div>
+                        <div class="input-group"><label>Contact</label><input type="tel" id="docContact" placeholder="Phone number" required></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add Doctor</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><i class="fas fa-stethoscope"></i> Our Medical Team</div>
+                <div class="table-wrapper">
+                    <table id="doctorsTable">
+                        <thead><tr><th>ID</th><th>Name</th><th>Specialization</th><th>Action</th> </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Appointments Panel -->
+        <div id="appointments" class="panel">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-calendar-plus"></i> Schedule Appointment</div>
+                <form id="appointmentForm">
+                    <div class="form-grid">
+                        <div class="input-group"><label>Patient</label><select id="appPatient" required></select></div>
+                        <div class="input-group"><label>Doctor</label><select id="appDoctor" required></select></div>
+                        <div class="input-group"><label>Date</label><input type="date" id="appDate" required></div>
+                        <div class="input-group"><label>Time</label><input type="time" id="appTime" required></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Schedule</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><i class="fas fa-calendar-alt"></i> All Appointments</div>
+                <div class="table-wrapper">
+                    <table id="appointmentsTable">
+                        <thead><tr><th>ID</th><th>Patient</th><th>Doctor</th><th>Date</th><th>Time</th><th>Action</th> </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Panel -->
+        <div id="team" class="panel">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-trophy"></i> Everest Golden Team - 8 Members</div>
+                <div class="team-grid" id="teamGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><i class="fas fa-crown"></i> Everest Golden Health Hospital | Premium Healthcare Excellence</p>
+        <p style="margin-top: 0.5rem;">Harun · Kawla · Kulud · Mohammed · Tesnim · Kalkidan · Yabsira · Kalaeb</p>
+    </footer>
+
+    <script>
+        const teamMembers = [
+            { name: "Harun Anwar", role: "Lead Architect", icon: "fa-crown" },
+            { name: "Kawla Khalid", role: "Frontend Director", icon: "fa-paintbrush" },
+            { name: "Kulud Mohammed", role: "Database Manager", icon: "fa-database" },
+            { name: "Mohammed Ahmed", role: "UI/UX Designer", icon: "fa-pen-ruler" },
+            { name: "Tesnim Nursefa", role: "System Analyst", icon: "fa-chart-line" },
+            { name: "Kalkidan Mechal", role: "QA Director", icon: "fa-check-double" },
+            { name: "Yabsira Kemal", role: "Documentation Head", icon: "fa-book" },
+            { name: "Kalaeb Gebre", role: "Security Officer", icon: "fa-shield" }
+        ];
+
+        function renderTeam() {
+            const grid = document.getElementById('teamGrid');
+            grid.innerHTML = teamMembers.map(m => `
+                <div class="team-card">
+                    <div class="team-avatar"><i class="fas ${m.icon}"></i></div>
+                    <h4>${m.name}</h4>
+                    <div class="team-role">${m.role}</div>
+                    <span class="team-badge"><i class="fas fa-star"></i> Golden Member</span>
+                </div>
+            `).join('');
+        }
+
+        let patients = JSON.parse(localStorage.getItem('golden_patients')) || [];
+        let doctors = JSON.parse(localStorage.getItem('golden_doctors')) || [];
+        let appointments = JSON.parse(localStorage.getItem('golden_appointments')) || [];
+
+        if(patients.length === 0) {
+            patients = [
+                {id: 1, name: "Selam Tesfaye", age: 32, gender: "Female", contact: "+251911223344", address: "Addis Ababa"},
+                {id: 2, name: "Abel Mekonnen", age: 45, gender: "Male", contact: "+251922334455", address: "Addis Ababa"}
+            ];
+            saveData();
+        }
+
+        if(doctors.length === 0) {
+            doctors = [
+                {id: 1, name: "Dr. Helen Assefa", specialization: "Cardiologist", contact: "+251933445566"},
+                {id: 2, name: "Dr. Yonas Desta", specialization: "Neurologist", contact: "+251944556677"}
+            ];
+            saveData();
+        }
+
+        if(appointments.length === 0) {
+            appointments = [
+                {id: 1, patientId: 1, doctorId: 1, date: "2024-12-28", time: "10:00", status: "Confirmed"},
+                {id: 2, patientId: 2, doctorId: 2, date: "2024-12-29", time: "14:30", status: "Confirmed"}
+            ];
+            saveData();
+        }
+
+        function saveData() {
+            localStorage.setItem('golden_patients', JSON.stringify(patients));
+            localStorage.setItem('golden_doctors', JSON.stringify(doctors));
+            localStorage.setItem('golden_appointments', JSON.stringify(appointments));
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('statPatients').innerHTML = patients.length;
+            document.getElementById('statDoctors').innerHTML = doctors.length;
+            document.getElementById('statAppointments').innerHTML = appointments.length;
+        }
+
+        function showPanel(panelId) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.getElementById(panelId).classList.add('active');
+            
+            if(panelId === 'dashboard') renderRecent();
+            if(panelId === 'patients') renderPatients();
+            if(panelId === 'doctors') renderDoctors();
+            if(panelId === 'appointments') { renderAppointments(); populateSelects(); }
+        }
+
+        function renderPatients() {
+            const tbody = document.querySelector('#patientsTable tbody');
+            tbody.innerHTML = patients.map(p => `
+                <tr>
+                    <td><strong>#${p.id}</strong></td>
+                    <td><i class="fas fa-user-circle"></i> ${p.name}</td>
+                    <td>${p.age}</td>
+                    <td>${p.contact}</td>
+                    <td><button class="btn btn-danger" onclick="deletePatient(${p.id})"><i class="fas fa-trash"></i> Delete</button></td>
+                </tr>
+            `).join('');
+        }
+
+        function renderDoctors() {
+            const tbody = document.querySelector('#doctorsTable tbody');
+            tbody.innerHTML = doctors.map(d => `
+                <tr>
+                    <td><strong>#${d.id}</strong></td>
+                    <td><i class="fas fa-user-md"></i> ${d.name}</td>
+                    <td><span class="status-badge">${d.specialization}</span></td>
+                    <td><button class="btn btn-danger" onclick="deleteDoctor(${d.id})"><i class="fas fa-trash"></i> Delete</button></td>
+                </tr>
+            `).join('');
+        }
+
+        function renderAppointments() {
+            const tbody = document.querySelector('#appointmentsTable tbody');
+            tbody.innerHTML = appointments.map(a => {
+                const patient = patients.find(p => p.id === a.patientId);
+                const doctor = doctors.find(d => d.id === a.doctorId);
+                return `
+                    <tr>
+                        <td><strong>#${a.id}</strong></td>
+                        <td>${patient ? patient.name : 'Unknown'}</td>
+                        <td>${doctor ? doctor.name : 'Unknown'}</td>
+                        <td>${a.date}</td>
+                        <td>${a.time}</td>
+                        <td><button class="btn btn-danger" onclick="deleteAppointment(${a.id})"><i class="fas fa-times"></i> Cancel</button></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function renderRecent() {
+            const tbody = document.querySelector('#recentTable tbody');
+            const recent = appointments.slice(-5).reverse();
+            tbody.innerHTML = recent.map(a => {
+                const patient = patients.find(p => p.id === a.patientId);
+                const doctor = doctors.find(d => d.id === a.doctorId);
+                return `
+                    <tr>
+                        <td>${patient ? patient.name : 'Unknown'}</td>
+                        <td>${doctor ? doctor.name : 'Unknown'}</td>
+                        <td>${a.date}</td>
+                        <td><span class="status-badge">${a.status}</span></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function populateSelects() {
+            const patientSelect = document.getElementById('appPatient');
+            const doctorSelect = document.getElementById('appDoctor');
+            patientSelect.innerHTML = '<option value="">Select Patient</option>' + patients.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+            doctorSelect.innerHTML = '<option value="">Select Doctor</option>' + doctors.map(d => `<option value="${d.id}">${d.name} - ${d.specialization}</option>`).join('');
+        }
+
+        document.getElementById('patientForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newPatient = {
+                id: patients.length ? Math.max(...patients.map(p => p.id)) + 1 : 1,
+                name: document.getElementById('patName').value,
+                age: document.getElementById('patAge').value,
+                gender: document.getElementById('patGender').value,
+                contact: document.getElementById('patContact').value,
+                address: document.getElementById('patAddress').value
+            };
+            patients.push(newPatient);
+            saveData();
+            renderPatients();
+            e.target.reset();
+            alert('✨ Patient registered successfully at Everest Golden Health!');
+        });
+
+        document.getElementById('doctorForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newDoctor = {
+                id: doctors.length ? Math.max(...doctors.map(d => d.id)) + 1 : 1,
+                name: document.getElementById('docName').value,
+                specialization: document.getElementById('docSpec').value,
+                contact: document.getElementById('docContact').value
+            };
+            doctors.push(newDoctor);
+            saveData();
+            renderDoctors();
+            e.target.reset();
+            alert('✨ Doctor added to Everest Golden Health team!');
+        });
+
+        document.getElementById('appointmentForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newApp = {
+                id: appointments.length ? Math.max(...appointments.map(a => a.id)) + 1 : 1,
+                patientId: parseInt(document.getElementById('appPatient').value),
+                doctorId: parseInt(document.getElementById('appDoctor').value),
+                date: document.getElementById('appDate').value,
+                time: document.getElementById('appTime').value,
+                status: "Confirmed"
+            };
+            appointments.push(newApp);
+            saveData();
+            renderAppointments();
+            e.target.reset();
+            alert('✨ Appointment scheduled at Everest Golden Health!');
+        });
+
+        function deletePatient(id) {
+            if(confirm('Remove this patient from records?')) {
+                patients = patients.filter(p => p.id !== id);
+                appointments = appointments.filter(a => a.patientId !== id);
+                saveData();
+                renderPatients();
+            }
+        }
+
+        function deleteDoctor(id) {
+            if(confirm('Remove this doctor from staff?')) {
+                doctors = doctors.filter(d => d.id !== id);
+                appointments = appointments.filter(a => a.doctorId !== id);
+                saveData();
+                renderDoctors();
+            }
+        }
+
+        function deleteAppointment(id) {
+            if(confirm('Cancel this appointment?')) {
+                appointments = appointments.filter(a => a.id !== id);
+                saveData();
+                renderAppointments();
+            }
+        }
+
+        renderTeam();
+        updateStats();
+        renderRecent();
+    </script>
+</body>
+</html>
